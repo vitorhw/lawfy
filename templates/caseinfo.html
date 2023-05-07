@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   {{ data[0]['name'] }} Case
+{% endblock %}
+
+{% block main %}
+
+    <a href='/'>Back</a>
+    
+    <p></br></p>
+
+    {% if updates[0]['action'] != 'no' %}
+      <div class="card border-danger mb-3">
+        <div class="card-header">
+          Needed Action
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ updates[0]['action'] }}</h5>
+          <p class="card-text">Please, contact the lawyer as soon as possible.</p>
+          <a href="#" class="btn btn-primary">Contact information</a>
+        </div>
+        <div class="card-footer text-muted">
+          {{ updates[0]['time'] }}
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{ data[0]['progress'] }}%" aria-valuenow="{{ data[0]['progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <h1></br></h1>
+    <h1> {{ data[0]['name'] }}</h1>
+    <p class="text-muted"> {{ data[0]['area'] }}</p>
+    <p class="text-muted"> {{ lawyer[0]['name'] }}</p>
+    <h1></br></h1>
+    <h2>Info:</h2>
+    <p></p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu orci luctus, dapibus neque vel, finibus enim. Nunc scelerisque nec elit mattis ultrices. Aliquam at augue luctus, lacinia nulla eget, pharetra sapien. Duis blandit eleifend egestas. Donec eu elit quis erat feugiat ullamcorper. Nam suscipit, erat at faucibus aliquet, nulla nunc porta urna, vel semper enim est sit amet elit. Sed elementum euismod facilisis. Praesent finibus aliquet vestibulum. Maecenas facilisis sem at turpis rhoncus vestibulum. Morbi feugiat pellentesque gravida. Maecenas auctor dui eget porta fermentum. </p>
+    
+    <h1></br></h1>
+    
+    <h2>Files:</h2>
+    </br>
+    <p class="text-muted">None</p>
+    
+    <h1></br></h1>
+    
+    <h2>Updates:</h2>
+    <h3></br></h3>
+    {% for update in updates %}
+      <div class="
+      {% if update['action'] != 'no' %}
+      card border-danger mb-3
+      {% else %}
+      card border-primary mb-3
+      {% endif %}
+      ">
+        <div class="card-header">
+          {{ update['time'] }}
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{ update['content'] }}</p>
+            {% if update['action'] != 'no' %}
+            <p>Action: {{ update['action'] }}</p>
+            {% endif %}
+            <footer class="blockquote-footer"><cite title="Sent by ">{{ lawyer[0]['name'] }}</cite></footer>
+          </blockquote>
+        </div>
+      </div>
+      <p></br></p>
+    {% endfor %}
+    
+    
+{% endblock %}

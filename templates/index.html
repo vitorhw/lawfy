@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cases
+{% endblock %}
+
+{% block main %}
+
+    <h1 style="text-align: left;">Hey, {{ name[0]['name'] }}</h1>
+    <h1></br></h1>
+
+    <div class="card-deck">
+    {% for case in cases %}
+            <div class="card" 
+            {% if case['progress'] == 100 %}
+                style="background-color: rgb(245,245,245);"
+            {% endif %}>
+              {% if case["area"] == "civil" %}
+              <img class="card-img-top" src="../static/civel.jpg" alt="card top">
+              {% elif case["area"] == "criminal" %}
+              <img class="card-img-top" src="../static/criminal.jpg" alt="card top">
+              {% else %}
+              <img class="card-img-top" src="../static/trabalhista.png" alt="card top">
+              {% endif %}
+              <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: {{ case['progress'] }}%" aria-valuenow="{{ case['progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ case["name"] }}</h5>
+                <p class="card-text">Area: {{ case["area"] }}</p>
+                <a href="/caseinfo?id={{ case["id"] }}" class="btn btn-primary">Details</a>
+                <p></br></p>
+                {% if case['action'] != 'no' %}
+                <div class="alert alert-danger" role="alert">
+                  Action Required
+                </div>
+                {% endif %}
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">👤 {{ case["lawyer"] }}</small>
+                </br>
+                <small class="text-muted">🔃 {{ case["update"] }}</small>
+              </div>
+            </div>
+    {% endfor %}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+    <form action="/login" method="post">
+        <div class="form-group">
+            <input oninput="mascara(this, 'cpf')" id="campo4" autocomplete="off" autofocus class="form-control" name="username" placeholder="CPF" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+
+    <script>
+
+       function mascara(i,t){
+
+       var v = i.value;
+
+       if(isNaN(v[v.length-1])){
+          i.value = v.substring(0, v.length-1);
+          return;
+       }
+
+       if(t == "cpf"){
+          i.setAttribute("maxlength", "14");
+          if (v.length == 3 || v.length == 7) i.value += ".";
+          if (v.length == 11) i.value += "-";
+       }
+
+    }
+    </script>
+
+{% endblock %}

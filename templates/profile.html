@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+
+    <p><b>Update Account</b></p>
+    <form action="/update" method="post">
+        <div class="form-group">
+            <input oninput="mascara(this, 'cpf')" id="campo4" autocomplete="off"  class="form-control" name="old_username"
+             type="hidden" value="{{ data[0]['username'] }}">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="old_name"
+             type="hidden" value="{{ data[0]['name'] }}">
+        </div>
+        <div class="form-group">
+            <input oninput="mascara(this, 'cpf')" id="campo4" autocomplete="off"  class="form-control" name="username"
+             type="text" value="{{ data[0]['username'] }}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="name" value="{{ data[0]['name'] }}" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+    <form action="/reset_pass" method="post">
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="id"
+             type="hidden" value="{{ data[0]['id'] }}">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="username"
+             type="hidden" value="{{ data[0]['username'] }}">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="name"
+             type="hidden" value="{{ data[0]['name'] }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Reset Password</button>
+    </form>
+
+    {% if cases %}
+    <h1></br></h1>
+    <p><b>Send Case Updates</b></p>
+        <form action="/push" method="post">
+        <div class="form-group">
+            <select class="form-control" style="width: 100%;" name="case_id">
+              {% for case in cases %}
+              <option value="{{ case['id'] }}">{{ case['id'] }} - {{ case['name'] }}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" style="width: 100%;" name="content" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off"  class="form-control" style="width: 100%;" name="action"
+             type="text" placeholder="action" value="no">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off"  class="form-control" style="width: 100%;" name="progress"
+             type="number" min="0" max="100" placeholder="progress"">
+        </div>
+        <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+    {% endif %}
+
+    <h1></br></h1>
+    <p><b>Cases</b></p>
+    {% if cases %}
+            <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Area</th>
+              <th scope="col">Progress</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+        {% for case in cases %}
+            <tr>
+              <th scope="row">{{ case['id'] }}</th>
+              <td>{{ case['name'] }}</td>
+              <td>{{ case['area'] }}</td>
+              <td>{{ case['progress'] }}%</td>
+              <td><a href="/edit_case?id={{ case['id'] }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+    <p class="text-muted">No registered cases yet</p>
+    {% endif %}
+
+
+    <script>
+
+       function mascara(i,t){
+
+       var v = i.value;
+
+       if(isNaN(v[v.length-1])){
+          i.value = v.substring(0, v.length-1);
+          return;
+       }
+
+       if(t == "cpf"){
+          i.setAttribute("maxlength", "14");
+          if (v.length == 3 || v.length == 7) i.value += ".";
+          if (v.length == 11) i.value += "-";
+       }
+
+    }
+    </script>
+
+{% endblock %}

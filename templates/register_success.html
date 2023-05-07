@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Success
+{% endblock %}
+
+{% block main %}
+
+    <img src="../static/logo.png" style="height: 10%; width: 10%">
+    
+    <h1>Client Portal</h1>
+    Hey, {{ name }}, You can now check information and updates on your case online!
+    <h2></br></h2>
+    access wwww.link.com and follow the instructions above
+    
+    <h1></br></h1>
+    <h4>Login Info</h4>
+    <b>CPF: </b> {{ cpf }}
+    </br>
+    <b>Key: </b> {{ pw }}
+    
+    
+    <h1></br></h1>
+    <a href="/admin">Back</a>
+
+{% endblock %}

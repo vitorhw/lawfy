@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+
+    <h1 style="text-align: left;">Dashboard</h1>
+
+    <p style="text-align: left;"><b>Create a new case</b></p>
+    <form action="/create_case" method="post">
+        <div class="form-group">
+            <input oninput="mascara(this, 'cpf')" id="campo4" autocomplete="off"  class="form-control" style="text-align: left;" placeholder="Client CPF" name="username" type="text">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" style="width: 100%;" name="name" placeholder="Case name" type="text">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" style="width: 100%;" name="area" placeholder="Case area" type="text">
+        </div>
+        <textarea class="form-control" style="width: 100%;" name="content" placeholder="Case description" rows="5"></textarea>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+
+    <script>
+
+       function mascara(i,t){
+
+       var v = i.value;
+
+       if(isNaN(v[v.length-1])){
+          i.value = v.substring(0, v.length-1);
+          return;
+       }
+
+       if(t == "cpf"){
+          i.setAttribute("maxlength", "14");
+          if (v.length == 3 || v.length == 7) i.value += ".";
+          if (v.length == 11) i.value += "-";
+       }
+
+    }
+    </script>
+
+{% endblock %}
