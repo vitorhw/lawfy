@@ -14,8 +14,8 @@ Lawfy - allows users to easily access updates and receive action items from thei
 - **Access Control:** Two rolesets for platform and dashboard access
 - **Freiendly Interface:** Users are able to see the progress of their cases and updates from the lawyer. The lawyer can easily create users, cases and append updates to them.
 
-![](https://github.com/vitorhw/lawfy/tree/master/images/showcase_admin.gif)
-![](https://github.com/vitorhw/lawfy/tree/master/images/showcase_user.gif)
+![user view](https://github.com/vitorhw/lawfy/blob/master/images/showcase_admin.gif)
+![admin view](https://github.com/vitorhw/lawfy/blob/master/images/showcase_user.gif)
 
 ## Built with
 
